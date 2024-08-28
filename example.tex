@@ -1,0 +1,29 @@
+\documentclass{article}
+
+\usepackage[paper=b5paper]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+
+\title{Scalar Curvature}
+\author{Your name}
+\date{\today}
+
+\begin{document}
+\maketitle
+\section{Introduction}
+It is known that scalar curvature controls the volume of geodesic ball.
+
+\section{Formula}
+\begin{theorem}
+    The asymptotic expression of volume of geodesic ball is:
+    \[\operatorname{Vol}(B_r(p))=\omega_nr^n\left(1-\frac{\operatorname{Scal}(p)}{6(n+2)}+O(r^3)\right),(r\to 0).\]
+\end{theorem}
+\begin{proof}
+    See Gallot, et.\ al., \emph{Riemannian Geometry}.
+\end{proof}
+
+\end{document}

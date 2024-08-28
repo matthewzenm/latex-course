@@ -6,8 +6,12 @@
 \usepackage[shortlabels]{enumitem}
 \usepackage{fancyvrb}
 \usepackage{graphicx}
+\usepackage{cancel}
 
 \lstset{language=TeX,
+    breaklines,
+    basicstyle=\ttfamily,
+    columns=flexible,
     numbers=left,
     numberstyle=\tiny,
     keywordstyle=\color{blue!70},
@@ -28,7 +32,7 @@
     \end{frame}
 }
 
-\usetheme{Berlin}
+\usetheme{Warsaw}
 \usefonttheme[onlymath]{serif}
 
 \title{高速\LaTeX{}入门课程}
@@ -54,6 +58,7 @@
     这个系统同样适用于生成从简单的信件到完整书籍的所有其他种类的文档.
 
     LaTeX使用TeX作为它的格式化引擎, 当前的版本是\LaTeXe.\pause
+
     \vspace{1cm}
     以上是抄的维基百科.
 \end{frame}
@@ -77,10 +82,10 @@
     \begin{enumerate}[(1)]
         \setcounter{enumi}{-1}
         \item \emph{能够}科学使用搜索引擎.
+        \item 学会如何使用\Verb|texdoc|命令或者在\Verb|CTAN|上查找宏包文档.
         \item 学会如何使用Overleaf或者\TeX{}Page进行\LaTeX{}写作.
         \item 学会编写属于自己的\emph{Hello, World!}文档.
         \item \emph{知道}怎么输入数学公式.
-        \item 学会如何使用\Verb|texdoc|命令或者在\Verb|CTAN|上查找宏包文档.
         \item 从我的群里薅走一些实用书籍.
     \end{enumerate}\pause
     我觉得这些就够了.
@@ -88,13 +93,33 @@
     有了上面这几点, 我认为已经有了一个良好的开端.
 \end{frame}
 
+\begin{frame}
+    \frametitle{搜索引擎和\Verb|texdoc|}
+    \textbf{不要用百度}$\times\infty$.
+    在国内目前对科研, 学习目的最友好的搜索引擎是必应.\footnote{微软快给我打钱.}
+    在搜索时, 善用高级搜索选项:
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.65\textwidth]{figure/bing-search.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{搜索引擎和\Verb|texdoc|}
+    如果你的电脑上安装了\TeX{}Live, 那么你可以在命令行中输入\Verb|texdoc $Packagename|来查看名为\Verb|Packagename|的宏包的文档.
+    如果没有安装的话, 可以在搜索引擎中搜素\Verb|CTAN $Packagename|搜索宏包文档.\pause
+
+    \textbf{练习1}: 使用\Verb|texdoc|或者在CTAN上找到文档\emph{lshort-chinese}.\\
+    \textbf{练习2}: 搜索在\LaTeX{}中使用\Verb|bibtex|插入参考文献的办法 (你不必要现在学会), \textbf{排除}所有来自\xcancel{CSDN}的内容.
+\end{frame}
+
 \section{环境配置}
 
 \begin{frame}
     \frametitle{\TeX{}Live的安装}
-    这道题期末不考.
+    这道题期末不考.\pause
 
-    感兴趣的同学可以查看文档\emph{一份简短的关于\LaTeX{}安装的介绍} (\Verb|texdoc install-latex-guide-zh-cn|, \Verb|texdoc|命令我们之后会讲到).
+    感兴趣的同学可以查看文档\emph{一份简短的关于\LaTeX{}安装的介绍} (\Verb|texdoc install-latex-guide-zh-cn|).
 \end{frame}
 
 \begin{frame}
@@ -108,7 +133,9 @@
     Then enjoy \LaTeX{ing}!
 \end{frame}
 
-\section{我的Hello, world!}
+\section{编写文档}
+
+\subsection{我的Hello, world!}
 
 \begin{frame}
     \frametitle{创建第一个项目}
@@ -127,9 +154,9 @@
     把Overleaf自带的代码全部删掉, 然后输入如下的代码:
     \begin{lstlisting}
         \documentclass[12pt]{article}
-        \usepackage[a4paer]{geometry}
+        \usepackage[paper=a4paer]{geometry}
         \title{Hello, World!}
-        \author{Your name}
+        \author{Your name\thanks{ID: Your ID}}
         \date{\today}
         \begin{document}
             \maketitle
@@ -146,6 +173,8 @@
         \includegraphics[width=0.8\textwidth]{figure/overleaf-compiler.png}
     \end{figure}
     然后可以点``重新编译''查看效果.
+
+    使用Overleaf的好处是你不用操心编译, 直接点``重新编译''就可以了.
 \end{frame}
 
 \begin{frame}[fragile]
@@ -160,9 +189,239 @@
     我们现在见过了控制序列\Verb|\documentclass[12pt]{article}|等, 接下来我们会仔细讨论它们的含义.
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
     \frametitle{导言区}
     文档\Verb|Hello, World!|的导言区为
+    \begin{lstlisting}
+        \documentclass[12pt]{article}
+        \usepackage[paper=a4paer]{geometry}
+    \end{lstlisting}\pause
+    在导言区中, 我们声明了\textbf{文档类}为\Verb|article|, 并\textbf{引用}了\Verb|geometry|包.
+    文档类\Verb|article|指的是文档的类型为``文章'', 文档类的参数\Verb|12pt|是全局字体大小, 默认为10pt, 这里调成12pt是为了照顾大家的英语课.
+    \Verb|geometry|包的参数\Verb|paper|指定了纸张大小为A4.\pause
+
+    \textbf{练习}: 将字体大小调节为10pt与11pt, 并调节纸张大小为\Verb|b5paper|, 观察效果.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{正文}
+    正文由\Verb|\begin{document}|与\Verb|\end{document}|包裹.
+    在这之后的任何内容都会被编译器忽略.\pause
+
+    正文中的\Verb|\maketitle|将产生标题 (页).
+    在\LaTeX{}中, 在源代码里断行将会导致文章中断句, 而分段则通过在源代码中给出一个空行实现.
+    建议无论使用什么语言写作, 都使用英文标点符号.
+    
+    \textbf{练习}: 在正文中输入以下代码, 并观察效果.
+    \begin{lstlisting}
+        \maketitle
+        Hello, world!
+        Hello, \LaTeX!
+
+        This is my document.
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{标题, 作者与日期}
+    观察以下五条控制序列:
+    \begin{lstlisting}
+        \title{Hello, World!}
+        \author{Your name\thanks{ID: Your ID}}
+        \date{\today}
+    \end{lstlisting}
+    其中\Verb|\title{}|指定文章的标题, \Verb|\author|指定作者, \Verb|\thanks{}|提供作者的信息, \Verb|\date{}|指定日期, 而\Verb|\today|则输出当前的日期.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{输入中文}
+    直接在\LaTeX{}里输入中文是做不到的, 我们需要使用一些宏包或者文档类.
+    我们可以在导言区引用\Verb|ctex|包
+    \begin{lstlisting}
+        \usepackage{ctex}
+    \end{lstlisting}
+    或者直接使用\Verb|ctexart|文档类 (中文文章文档类.)
+    \begin{lstlisting}
+        \documentclass{ctexart}
+    \end{lstlisting}
+    \pause
+
+    \textbf{提示1}: 一定要使用XeLaTeX编译.\pause
+
+    \textbf{提示2}: 课下你可能会找到某些告诉你使用\Verb|CJK|包输入中文的资料, 这是\textbf{过时的}, 一定不要学.
+\end{frame}
+
+\subsection{输入数学公式}
+\begin{frame}[fragile]
+    \frametitle{输入数学公式}
+    现在流行的数学公式输入宏包是来自美国数学会的\Verb|amsmath|宏包.
+    新建一个项目 (这个应该都会了吧), 然后在导言区输入
+    \begin{lstlisting}
+        \usepackage{amsmath}
+        \usepackage{amssymb}
+        \usepackage{amsthm}
+    \end{lstlisting}
+    (请记得补充完整文档类, 标题和\Verb|\maketitle|)
+    这三个宏包依次提供AMS数学环境, 更多的符号和定理环境.
+    然后在正文输入
+    \begin{lstlisting}
+        We have Pythagorean theorem $a^2+b^2=c^2$ and fundamental theorem of calculus
+        \[\int_a^bf'(x)dx=f(b)-f(a)\]
+        provided $f'(x)$ is Riemann integrable.
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{数学公式: 语法}
+    数学公式分为两种, 一种是\emph{行内公式}, 另一种是\emph{行间公式}, 分别使用\Verb|$...$|和\Verb|\[...\]|包裹.
+    也有使用\Verb|\(...\)|包裹行内公式和使用\Verb|$$...$$|包裹行间公式的, 但这两种写法我个人不推荐.
+
+    在上一页的公式中, 我们见到了\Verb|a^b|表示上标.
+    而下标则通过\Verb|a_b|表示.
+    \Verb|\int|则是\emph{算符}, 它会作用在一些公式上.
+    \Verb|amsmath|宏包提供了很多常见函数, 例如下面的例子:
+    \begin{lstlisting}
+        傅里叶分析中的狄利克雷核为
+        \[\sum_{n=-N}^{N}e^{inx}=\frac{\sin(N+\frac{1}{2})x}{\sin(x/2)}\]
+    \end{lstlisting}
+    (记得引\Verb|ctex|包哦$\sim$)
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{数学公式: 语法}
+    在上一页的公式中, 要注意花括号的作用.
+    请尝试编译代码\Verb|\int_0^1f|并观察效果.
+
+    事实上, \TeX{}引擎编译时的实际过程是逐字符展开, 一个控制序列实际上是一系列字符的组合, 而花括号形成一个``组'', 并被视为一个字符.
+
+    回到上一页的公式, 我们见到了表示分式的\Verb|\frac{}{}|.
+    与分式类似的有根式\Verb|\sqrt[]{}|.
+    请编译以下代码并观察效果.
+    \begin{lstlisting}
+        方程$x^n=a$ ($a>0$) 的$n$个复根为
+        \[x_k=\sqrt[n]{a}(\cos\frac{2k\pi}{n}+i\sin\frac{2k\pi}{n}).\]
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}
+    \frametitle{学习数学公式输入}
+    受到篇幅和课时限制, 本幻灯片不可能面面俱到地讲授\LaTeX{}的公式输入.
+    所以我们应当阅读一些书籍, 例如我们提到的\emph{一份 (不太) 简短的\LaTeXe{}介绍}.
+    接下来我们通过阅读学习一些\LaTeX{}公式输入技巧.\pause
+
+    现在请阅读4.3.9小节, 并重新输入上一页的公式:
+    \[x_k=\sqrt[n]{a}\left(\cos\frac{2k\pi}{n}+i\sin\frac{2k\pi}{n}\right)\]
+    \textbf{提示}: 我们这里使用了\emph{定界符}来控制括号的大小.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{学习数学公式输入}
+    现在请阅读4.5节, 并输入下面的矩阵公式:
+    \begin{align*}
+        &\frac{d}{dx}\left(\det\left[\begin{array}{ccc}
+            f_{11}(x) & \cdots & f_{1n}(x)\\
+            \vdots & \ddots & \vdots \\
+            f_{n1}(x) & \cdots & f_{nn}(x)
+        \end{array}\right]\right)\\
+        =&\sum_{i=1}^n\det\left[\begin{array}{ccccc}
+            f_{11}(x) & \cdots & f'_{1i}(x) & \cdots & f_{1n}(x)\\
+            \vdots & \ddots & \vdots & \ddots & \vdots \\
+            f_{n1}(x) & \cdots & f'_{ni}(x) & \cdots & f_{nn}(x)
+        \end{array}\right]
+    \end{align*}
+    输入的时候不需要考虑换行, 直接输入即可.
+
+    可能会用到的符号: 行列式\Verb|\det|, 横省略号$\cdots$\Verb|\cdots|, 竖省略号$\vdots$\Verb|\vdots|, 斜省略号$\ddots$\Verb|\ddots|.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{数学符号表}
+    在\Verb|lshort-chinese|中, 第4.9节为数学符号表.
+    请对照数学符号表输入以下公式:
+    \[\Gamma^\alpha_{\beta\gamma}=\frac{1}{2}g^{\alpha\nu}(\partial_\beta g_{\nu\gamma}+\partial_\gamma g_{\beta\nu}-\partial_\nu g_{\beta\gamma}).\]
+    以及
+    \[\operatorname{Vol}(B_r(p))=\omega_nr^n\left(1-\frac{\operatorname{Scal}(p)}{6(n+2)}+O(r^3)\right),(r\to 0)\]
+    \textbf{提示}: $\operatorname{Vol}$与$\operatorname{Scal}$是算符, 请用\Verb|\operatorname{}|包裹它们.
+    \pause
+
+    \Verb|lshort-chinese|中的符号表是一个比较小 (但是够用) 的符号表, 完整的符号表请使用\Verb|texdoc|或者CTAN查找文档\Verb|symbols| (完整名称为\emph{The Comprehensive \LaTeX{} Symbol List}).
+\end{frame}
+
+\section{一个完整的例子}
+
+\begin{frame}
+    \frametitle{一个完整的例子}
+    请再次新建一个项目 (这次你可以不删代码), 尽可能地输出如图的文档.\footnote{我猜你现在不会.}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.7\textwidth]{figure/example.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{文档结构}
+    \Verb|article|文档类提供了从高到低\Verb|\section|, \Verb|\subsection|, \Verb|\subsubsection|三个层次的章节.
+    如果你之后可能会用到\Verb|book|文档类的话, 最高还有一个\Verb|\chapter|章节层级.
+
+    在你需要的位置可以放置\Verb|\tableofcontents|生成目录.
+
+    \textbf{练习}: 随便打开一个项目, 然后设置小节并生成目录.
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{定理环境}
+    \Verb|amsthm|包中提供了声明定理环境的方法.
+    一个例子如下:
+    \begin{lstlisting}
+        \theoremstyle{plain}
+        \newtheorem{theorem}{Theorem}
+    \end{lstlisting}
+    其中\Verb|\theoremstyle{}|决定了接下来声明的定理环境的风格, 有plain, definition和remark三种选择.
+    \Verb|\newtheorem{}{}|则声明了定理环境, 前一个参数表示控制序列的名称, 后一个参数则表示显示的名称.
+    例如, 在以上代码声明了\Verb|Theorem|环境之后, 可以通过代码
+    \begin{lstlisting}
+        \begin{theorem}
+            Scalar curvature\dots
+        \end{theorem}
+    \end{lstlisting}
+    来使用\Verb|Theorem|环境.
+\end{frame}
+
+\begin{frame}[fragile]
+    \Verb|amsmath|包中也提供了证明环境, 使用\Verb|\begin{proof}|与\Verb|\end{proof}|包裹即可.
+    例如
+    \begin{lstlisting}
+        \begin{proof}
+            We have Ricci identity
+            \[\nabla_{Y,X}T-\nabla_{X,Y}T=R(X,Y)T\]
+        \end{proof}
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}
+    \frametitle{一个完整的例子}
+    现在你应该可以完成这个练习了.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.7\textwidth]{figure/example.png}
+    \end{figure}
+\end{frame}
+
+\section{结束语}
+
+\begin{frame}
+    \frametitle{最后的话}
+    最后我想说
+    \begin{itemize}
+        \item<2-> 首先不要害怕使用\LaTeX{}, 虽然\LaTeX{}上手确实不容易, 但是对着书籍和搜索引擎边用边改也是能够入门的.
+        \item<3-> 请一定要去阅读\emph{一份 (不太) 简短的\LaTeXe{}介绍}, 即使没有时间全部读完也要挑着重点读.
+        \item<4-> 善用搜索引擎, 多问师兄师姐. 直接找我装\TeX{}Live都是可以的.
+        \item<5-> 可以试试AI\dots?  
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \Huge{\centerline{感谢聆听!}}
 \end{frame}
 
 \end{document}

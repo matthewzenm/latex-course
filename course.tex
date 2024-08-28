@@ -107,7 +107,7 @@
 \begin{frame}[fragile]
     \frametitle{搜索引擎和\Verb|texdoc|}
     如果你的电脑上安装了\TeX{}Live, 那么你可以在命令行中输入\Verb|texdoc $Packagename|来查看名为\Verb|Packagename|的宏包的文档.
-    如果没有安装的话, 可以在搜索引擎中搜素\Verb|CTAN $Packagename|搜索宏包文档.\pause
+    如果没有安装的话, 可以在搜索引擎中搜索\Verb|CTAN $Packagename|搜索宏包文档.\pause
 
     \textbf{练习1}: 使用\Verb|texdoc|或者在CTAN上找到文档\emph{lshort-chinese}.\\
     \textbf{练习2}: 搜索在\LaTeX{}中使用\Verb|bibtex|插入参考文献的办法 (你不必要现在学会), \textbf{排除}所有来自\xcancel{CSDN}的内容.
@@ -154,7 +154,7 @@
     把Overleaf自带的代码全部删掉, 然后输入如下的代码:
     \begin{lstlisting}
         \documentclass[12pt]{article}
-        \usepackage[paper=a4paer]{geometry}
+        \usepackage[paper=a4paper]{geometry}
         \title{Hello, World!}
         \author{Your name\thanks{ID: Your ID}}
         \date{\today}
@@ -194,7 +194,7 @@
     文档\Verb|Hello, World!|的导言区为
     \begin{lstlisting}
         \documentclass[12pt]{article}
-        \usepackage[paper=a4paer]{geometry}
+        \usepackage[paper=a4paper]{geometry}
     \end{lstlisting}\pause
     在导言区中, 我们声明了\textbf{文档类}为\Verb|article|, 并\textbf{引用}了\Verb|geometry|包.
     文档类\Verb|article|指的是文档的类型为``文章'', 文档类的参数\Verb|12pt|是全局字体大小, 默认为10pt, 这里调成12pt是为了照顾大家的英语课.

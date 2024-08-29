@@ -106,8 +106,8 @@
 
 \begin{frame}[fragile]
     \frametitle{搜索引擎和\Verb|texdoc|}
-    如果你的电脑上安装了\TeX{}Live, 那么你可以在命令行中输入\Verb|texdoc $Packagename|来查看名为\Verb|Packagename|的宏包的文档.
-    如果没有安装的话, 可以在搜索引擎中搜索\Verb|CTAN $Packagename|搜索宏包文档.\pause
+    如果你的电脑上安装了\TeX{}Live, 那么你可以在命令行中输入\Verb|texdoc Packagename|来查看名为\Verb|Packagename|的宏包的文档.
+    如果没有安装的话, 可以在搜索引擎中搜索\Verb|CTAN Packagename|搜索宏包文档.\pause
 
     \textbf{练习1}: 使用\Verb|texdoc|或者在CTAN上找到文档\emph{lshort-chinese}.\\
     \textbf{练习2}: 搜索在\LaTeX{}中使用\Verb|bibtex|插入参考文献的办法 (你不必要现在学会), \textbf{排除}所有来自\xcancel{CSDN}的内容.
@@ -151,7 +151,7 @@
 
 \begin{frame}[fragile]
     \frametitle{编写Hello, world!的代码}
-    把Overleaf自带的代码全部删掉, 然后输入如下的代码:
+    把Overleaf自带的代码全部删掉, 然后输入如下的代码: (请注意所有标点都是英文标点)
     \begin{lstlisting}
         \documentclass[12pt]{article}
         \usepackage[paper=a4paper]{geometry}
@@ -163,6 +163,7 @@
             Hello, world! Hello, \LaTeX!
         \end{document}
     \end{lstlisting}
+    或者直接复制粘贴我群里发的代码.
 \end{frame}
 
 \begin{frame}
@@ -248,7 +249,7 @@
 
     \textbf{提示1}: 一定要使用XeLaTeX编译.\pause
 
-    \textbf{提示2}: 课下你可能会找到某些告诉你使用\Verb|CJK|包输入中文的资料, 这是\textbf{过时的}, 一定不要学.
+    \textbf{提示2}: 课下你可能会找到某些告诉你使用\Verb|CJK|包或者\Verb|cctart|文档类输入中文的资料, 这是\textbf{过时的}, 一定不要学.
 \end{frame}
 
 \subsection{输入数学公式}
@@ -289,10 +290,14 @@
 
 \begin{frame}[fragile]
     \frametitle{数学公式: 语法}
-    在上一页的公式中, 要注意花括号的作用.
-    请尝试编译代码\Verb|\int_0^1f|并观察效果.
+    在上一页的公式中, 要注意花括号和算符的作用.
+    请尝试编译以下代码并观察效果.
+    \begin{lstlisting}
+        \[e^ix=cos(x)+isin(x)\]
+        \[e^{ix}=\cos(x)+i\sin(x)\]
+    \end{lstlisting}
 
-    事实上, \TeX{}引擎编译时的实际过程是逐字符展开, 一个控制序列实际上是一系列字符的组合, 而花括号形成一个``组'', 并被视为一个字符.
+    事实上, \TeX{}引擎编译时的实际过程是逐字符展开, 一个控制序列实际上是一系列字符的组合, 而花括号形成一个``组'', 并被视为一个字符.\pause
 
     回到上一页的公式, 我们见到了表示分式的\Verb|\frac{}{}|.
     与分式类似的有根式\Verb|\sqrt[]{}|.
@@ -340,8 +345,9 @@
     请对照数学符号表输入以下公式:
     \[\Gamma^\alpha_{\beta\gamma}=\frac{1}{2}g^{\alpha\nu}(\partial_\beta g_{\nu\gamma}+\partial_\gamma g_{\beta\nu}-\partial_\nu g_{\beta\gamma}).\]
     以及
-    \[\operatorname{Vol}(B_r(p))=\omega_nr^n\left(1-\frac{\operatorname{Scal}(p)}{6(n+2)}+O(r^3)\right),(r\to 0)\]
+    \[\operatorname{Vol}(B_r(p))=\omega_nr^n\left(1-\frac{\operatorname{Scal}(p)}{6(n+2)}+O(r^3)\right)\quad(r\to 0).\]
     \textbf{提示}: $\operatorname{Vol}$与$\operatorname{Scal}$是算符, 请用\Verb|\operatorname{}|包裹它们.
+    可以用\Verb|\quad|制造一个较长的空格.
     \pause
 
     \Verb|lshort-chinese|中的符号表是一个比较小 (但是够用) 的符号表, 完整的符号表请使用\Verb|texdoc|或者CTAN查找文档\Verb|symbols| (完整名称为\emph{The Comprehensive \LaTeX{} Symbol List}).
@@ -368,6 +374,29 @@
     \textbf{练习}: 随便打开一个项目, 然后设置小节并生成目录.
 \end{frame}
 
+\begin{frame}
+    \frametitle{字体控制}
+    \LaTeX{}中提供了控制字体类型的命令.
+    具体使用如下表:
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.7\textwidth]{figure/lshort-fonts.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{字体控制}
+    有些同学可能有使用\textrm{Times}类字体的需求, 这里提供两种解决方案:\\
+    (1) 使用\Verb|fontspec|宏包, 一个最小工作示例是
+    \begin{lstlisting}
+        \usepackage{fontspec}
+        \setmainfont{Times New Roman}
+    \end{lstlisting}
+    注意使用\Verb|fontspec|包的话必须使用XeLaTeX编译.\\
+    (2) 使用\Verb|newtxtext|与\Verb|newtxmath|宏包.
+    这将同时改变你的正文字体与数学字体.
+\end{frame}
+
 \begin{frame}[fragile]
     \frametitle{定理环境}
     \Verb|amsthm|包中提供了声明定理环境的方法.
@@ -388,6 +417,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
+    \frametitle{证明环境}
     \Verb|amsmath|包中也提供了证明环境, 使用\Verb|\begin{proof}|与\Verb|\end{proof}|包裹即可.
     例如
     \begin{lstlisting}
@@ -415,8 +445,8 @@
     \begin{itemize}
         \item<2-> 首先不要害怕使用\LaTeX{}, 虽然\LaTeX{}上手确实不容易, 但是对着书籍和搜索引擎边用边改也是能够入门的.
         \item<3-> 请一定要去阅读\emph{一份 (不太) 简短的\LaTeXe{}介绍}, 即使没有时间全部读完也要挑着重点读.
-        \item<4-> 善用搜索引擎, 多问师兄师姐. 直接找我装\TeX{}Live都是可以的.
-        \item<5-> 可以试试AI\dots?  
+        \item<4-> 善用搜索引擎, 可以试试AI\dots?
+        \item<5-> 实在不行了就多问师兄师姐. 直接找我装\TeX{}Live都是可以的.
     \end{itemize}
 \end{frame}
 

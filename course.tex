@@ -64,6 +64,24 @@
 \end{frame}
 
 \begin{frame}
+    \frametitle{为什么要学\LaTeX{}?}
+    工欲善其事, 必先利其器, 使用\LaTeX{}的\textbf{根本}目的是精确地排版大量数学公式.
+    所以如果满足以上两个条件其一的就可以使用\LaTeX{}:\pause
+    (1) 写\textbf{数学} (物理, 建模\dots, etc.) 作业, 写笔记;
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.6\textwidth]{figure/first-variation.png}
+    \end{figure} 
+\end{frame}
+
+\begin{frame}
+    (2) 对排版要求很高的文档.\pause
+
+    当然, 要用合适的工具完成合适的任务.
+    如果是排版简单的文档, 可以使用Microsoft Word提高效率; 如果涉及到大量复杂的表格, 应该使用Microsoft Excel; 如果你对排版有着出版物一样的极端要求, 应该使用Adobe InDesign.
+\end{frame}
+
+\begin{frame}
     \frametitle{参考资料}
     我们推荐一些可以阅读的参考资料.\pause
     \begin{itemize}
@@ -197,6 +215,7 @@
         \documentclass[12pt]{article}
         \usepackage[paper=a4paper]{geometry}
     \end{lstlisting}\pause
+    简单的识别导言区的方法就是导言区在\Verb|\begin{document}|之前.
     在导言区中, 我们声明了\textbf{文档类}为\Verb|article|, 并\textbf{引用}了\Verb|geometry|包.
     文档类\Verb|article|指的是文档的类型为``文章'', 文档类的参数\Verb|12pt|是全局字体大小, 默认为10pt, 这里调成12pt是为了照顾大家的英语课.
     \Verb|geometry|包的参数\Verb|paper|指定了纸张大小为A4.\pause
@@ -249,7 +268,9 @@
 
     \textbf{提示1}: 一定要使用XeLaTeX编译.\pause
 
-    \textbf{提示2}: 课下你可能会找到某些告诉你使用\Verb|CJK|包或者\Verb|cctart|文档类输入中文的资料, 这是\textbf{过时的}, 一定不要学.
+    \textbf{提示2}: 课下你可能会找到某些告诉你使用\Verb|CJK|包或者\Verb|cctart|文档类输入中文的资料, 这是\textbf{过时的}, 一定不要学.\pause
+
+    \textbf{练习}: 引用\Verb|ctex|包, 然后在你刚才的文档里随便输入一些中文试试.
 \end{frame}
 
 \subsection{输入数学公式}
@@ -353,11 +374,11 @@
     \Verb|lshort-chinese|中的符号表是一个比较小 (但是够用) 的符号表, 完整的符号表请使用\Verb|texdoc|或者CTAN查找文档\Verb|symbols| (完整名称为\emph{The Comprehensive \LaTeX{} Symbol List}).
 \end{frame}
 
-\section{一个完整的例子}
+\subsection{一个完整的例子}
 
 \begin{frame}
     \frametitle{一个完整的例子}
-    请再次新建一个项目 (这次你可以不删代码), 我们的目标是尽可能地输出如图的文档.
+    请再次新建一个项目 (这次你可以不删代码), 我们的目标是尽可能地输出如图的文档 (纸张要求为B5).
     \begin{figure}[h]
         \centering
         \includegraphics[width=0.7\textwidth]{figure/example.png}
@@ -435,6 +456,30 @@
         \centering
         \includegraphics[width=0.7\textwidth]{figure/example.png}
     \end{figure}
+\end{frame}
+
+\subsection{使用模板}
+
+\begin{frame}
+    \frametitle{使用模板}
+    请打开Overleaf, 自行摸索搜索模板 (template) 的方式, 然后找到``BNU课程论文模板''.
+    此后, 学习使用该模板并重新完成上面的例子. (注意效果肯定会发生变化)
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.7\textwidth]{figure/example.png}
+    \end{figure}
+\end{frame}
+
+\subsection{调试}
+
+\begin{frame}
+    \frametitle{调试}
+    调试, 或者说debug, 是写\LaTeX{}时不可避免会遇到的修正错误的过程.
+
+    请大家将压缩包中的\Verb|debug.zip|上传至Overleaf (新建项目--上传项目), 然后编译, 看看会发生什么.
+    接下来请大家和我一起debug.
+
+    再次提醒一个好习惯: 请务必在代码中分行, 也即一行只写一句话, 这对debug大有裨益.
 \end{frame}
 
 \section{结束语}

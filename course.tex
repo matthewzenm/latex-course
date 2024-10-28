@@ -1,6 +1,7 @@
 \documentclass{beamer}
 
 \usepackage[fontset=none]{ctex}
+\usepackage{metalogo}
 \usepackage{listings}
 \usepackage{geometry}
 \usepackage[shortlabels]{enumitem}
@@ -186,7 +187,7 @@
 
 \begin{frame}
     \frametitle{一个好习惯}
-    点击左上角``菜单'', 然后如图将编译器调整为XeLaTeX.
+    点击左上角``菜单'', 然后如图将编译器调整为\XeLaTeX{}.
     \begin{figure}[h]
         \centering
         \includegraphics[width=0.8\textwidth]{figure/overleaf-compiler.png}
@@ -266,7 +267,7 @@
     \end{lstlisting}
     \pause
 
-    \textbf{提示1}: 一定要使用XeLaTeX编译.\pause
+    \textbf{提示1}: 一定要使用\XeLaTeX{}编译.\pause
 
     \textbf{提示2}: 课下你可能会找到某些告诉你使用\Verb|CJK|包或者\Verb|cctart|文档类输入中文的资料, 这是\textbf{过时的}, 一定不要学.\pause
 
@@ -413,7 +414,7 @@
         \usepackage{fontspec}
         \setmainfont{Times New Roman}
     \end{lstlisting}
-    注意使用\Verb|fontspec|包的话必须使用XeLaTeX编译.\\
+    注意使用\Verb|fontspec|包的话必须使用\XeLaTeX{}编译.\\
     (2) 使用\Verb|newtxtext|与\Verb|newtxmath|宏包.
     这将同时改变你的正文字体与数学字体.
 \end{frame}
